@@ -1,0 +1,34 @@
+﻿@using ProgrammingJokes.Web.Models
+@using ProgrammingJokes.Data
+@model JokesViewModel
+
+<div class="row">
+
+    @foreach (Joke j in Model.Jokes)
+    {
+        <div class="col-md-6 col-md-offset-3">
+            <div class="well">
+                <h2><a href="/home/index?jokeid=@j.Id">@j.Setup</a></h2>
+                <hr />
+                <h7>@j.Id / @j.JokeId</h7>
+                <hr />
+                <h6>@j.Likes.Where(l => l.Liked == true).Count() Likes</h6>
+                <h6>@j.Likes.Where(l => l.Liked == false).Count() Dislikes</h6>
+
+                @if (Model.CurrentUser != null && j.Likes.Any(l => l.UserId == Model.CurrentUser.Id))
+                {
+                    if (j.Likes.FirstOrDefault(l => l.UserId == Model.CurrentUser.Id && l.JokeId == j.Id).Liked == true)
+                    {
+                        <h6>You liked this Joke</h6>
+                    }
+                    else
+                    {
+                        <h6>You disliked this Joke</h6>
+                    }
+                }
+            </div>
+        </div>
+    }
+
+</div>
+

@@ -1,0 +1,29 @@
+﻿@using ProgrammingJokes.Web.Models
+@using ProgrammingJokes.Data
+@model IndexViewModel
+
+<div class="row" data-id="@Model.Joke.Id">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+            <h2>@Model.Joke.Setup</h2>
+            <hr />
+            <h2>@Model.Joke.Punchline</h2>
+            <hr />
+            <h7>@Model.Joke.Id / @Model.Joke.JokeId</h7>
+            <br />
+            @if (Model.CurrentUser != null)
+            {
+                <span style="font-size: 25px" class="glyphicon glyphicon-thumbs-up" id="like"></span>
+                <span style="font-size: 25px" class="glyphicon glyphicon-thumbs-down" id="dislike"></span>
+            }
+            <span id="l">@Model.LikeCount.Likes</span>
+            <span>Likes</span>
+            <span id="d">@Model.LikeCount.Dislikes</span>
+            <span>Disikes</span>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/js/JavaScript.js"></script>
+}
